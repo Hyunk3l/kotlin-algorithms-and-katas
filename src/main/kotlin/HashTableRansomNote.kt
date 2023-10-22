@@ -6,54 +6,30 @@
  *  2. STRING_ARRAY note
  */
 
-fun checkMagazine(magazine: Array<String>, note: Array<String>, numberToFind: Int): Unit {
-    val divisor = getDivisor(magazine.size)
-    var found = false
-    if (magazine.size > 1000 && divisor > 0) {
-        val newArraySize = magazine.size / divisor
-        var start = 0
-        for (i in 1..divisor) {
-            val end = ( newArraySize * i ) - 1
-            val subset = magazine.sliceArray(start until end)
-            found = run(subset, note, numberToFind)
-            start = end
+fun checkMagazine(magazine: Array<String>, note: Array<String>, numberToFind: Int): Boolean {
+    val map = HashMap<String, Int>()
 
-            if (found) break
-        }
-    } else {
-        found = run(magazine, note, numberToFind)
+    for (element in magazine) {
+        map[element] = map.getOrDefault(element, 0) + 1
     }
 
-    if (found) println("Yes") else println("No")
-}
+    val commonElements = mutableListOf<String>()
 
-private fun run(magazine: Array<String>, note: Array<String>, numberToFind: Int): Boolean {
-    var counter = 0
-    for (element: String in magazine) {
-        if (note.contains(element)) {
-            counter++
-        } else if (counter >= numberToFind) {
-            return true
+    for (element in note) {
+        if (map.containsKey(element) && map[element]!! > 0) {
+            commonElements.add(element)
+            map[element] = map[element]!! - 1
         }
     }
-    return false
-}
 
-private fun getDivisor(number: Int): Int {
-    val divisor = (10 downTo 1).takeWhile { number % it == 0 }
-    return if (divisor.isEmpty()) 0 else divisor.last()
+    return (commonElements.size >= numberToFind)
 }
 
 fun main(args: Array<String>) {
-    val first_multiple_input = readLine()!!.trimEnd().split(" ")
+    val n = 4
+    val magazine = "give me one grand today night".trimEnd().split(" ").toTypedArray()
+    val note = "give one grand today".trimEnd().split(" ").toTypedArray()
 
-    val m = first_multiple_input[0].toInt()
-
-    val n = first_multiple_input[1].toInt()
-
-    val magazine = readLine()!!.trimEnd().split(" ").toTypedArray()
-
-    val note = readLine()!!.trimEnd().split(" ").toTypedArray()
-
-    checkMagazine(magazine, note, n)
+    assert(checkMagazine(magazine, note, n))
+    assert(checkMagazine(magazine, note, n))
 }
