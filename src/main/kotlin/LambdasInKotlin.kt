@@ -1,5 +1,5 @@
 
-private fun operation(first: Int, second: Int, predicate: (Int, Int) -> Int): Unit {
+private fun operation(first: Int, second: Int, predicate: (Int, Int) -> Int) {
     println("Operation $first $second: ${predicate(first, second)}")
 }
 
