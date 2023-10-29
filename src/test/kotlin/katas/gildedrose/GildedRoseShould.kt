@@ -1,14 +1,13 @@
 package katas.gildedrose
 
 import io.kotest.matchers.shouldBe
-import katas.gildedrose.BaseItem.*
 import org.junit.jupiter.api.Test
 
 class GildedRoseShould {
     @Test
     fun `update quality of a single item`() {
         val items = listOf(
-            Item(
+            GenericItem(
                 name = "Mozzarella",
                 sellIn = 5,
                 quality = 50
@@ -25,7 +24,7 @@ class GildedRoseShould {
     @Test
     fun `degrade quality twice faster if sell in date has passed`() {
         val items = listOf(
-            Item(
+            GenericItem(
                 name = "Mozzarella",
                 sellIn = 0,
                 quality = 50
@@ -43,7 +42,7 @@ class GildedRoseShould {
     @Test
     fun `not update in case quality is 0`() {
         val items = listOf(
-            Item(
+            GenericItem(
                 name = "Mozzarella",
                 sellIn = 1,
                 quality = 0

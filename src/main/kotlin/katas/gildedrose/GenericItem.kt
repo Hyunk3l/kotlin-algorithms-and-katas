@@ -5,7 +5,7 @@ private const val AGED_BRIE = "Aged Brie"
 private const val BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
 private const val SULFURAS = "Sulfuras, Hand of Ragnaros"
 
-sealed class BaseItem(open var name: String, open var sellIn: Int, open var quality: Int) {
+sealed class Item(open var name: String, open var sellIn: Int, open var quality: Int) {
 
     open fun update() {
         this.decreaseDaysByOne()
@@ -29,8 +29,8 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     protected fun isExpired(): Boolean = this.sellIn < 0
 }
 
-data class Item(override var name: String, override var sellIn: Int, override var quality: Int) :
-    BaseItem(name, sellIn, quality) {
+data class GenericItem(override var name: String, override var sellIn: Int, override var quality: Int) :
+    Item(name, sellIn, quality) {
 
     override fun computeQuality() {
         if (this.isExpired()) {
@@ -41,7 +41,7 @@ data class Item(override var name: String, override var sellIn: Int, override va
     }
 }
 
-data class AgedBrie(override var sellIn: Int, override var quality: Int) : BaseItem(AGED_BRIE, sellIn, quality) {
+data class AgedBrie(override var sellIn: Int, override var quality: Int) : Item(AGED_BRIE, sellIn, quality) {
 
     override fun computeQuality() {
         this.increaseQualityBy(1)
@@ -49,7 +49,7 @@ data class AgedBrie(override var sellIn: Int, override var quality: Int) : BaseI
     }
 }
 
-data class Backstage(override var sellIn: Int, override var quality: Int) : BaseItem(BACKSTAGE, sellIn, quality) {
+data class Backstage(override var sellIn: Int, override var quality: Int) : Item(BACKSTAGE, sellIn, quality) {
 
     override fun computeQuality() {
         if (this.sellIn < 6) {
@@ -64,7 +64,7 @@ data class Backstage(override var sellIn: Int, override var quality: Int) : Base
     }
 }
 
-data class Sulfuras(override var sellIn: Int) : BaseItem(SULFURAS, sellIn, quality = 80) {
+data class Sulfuras(override var sellIn: Int) : Item(SULFURAS, sellIn, quality = 80) {
     override fun update() {
         this.computeQuality()
     }
