@@ -24,66 +24,63 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     }
 
     protected fun isExpired(): Boolean = this.sellIn < 0
+}
 
-    data class Item(override var name: String, override var sellIn: Int, override var quality: Int) :
-        BaseItem(name, sellIn, quality) {
+data class Item(override var name: String, override var sellIn: Int, override var quality: Int) :
+    BaseItem(name, sellIn, quality) {
 
-        override fun update() {
-            this.decreaseDaysByOne()
-            this.computeQuality()
-        }
-
-        override fun computeQuality() {
-            if (this.isExpired()) {
-                this.decreaseQualityBy(2)
-            } else {
-                this.decreaseQualityBy(1)
-            }
-        }
+    override fun update() {
+        this.decreaseDaysByOne()
+        this.computeQuality()
     }
 
-    data class AgedBrie(override var sellIn: Int, override var quality: Int) :
-        BaseItem(AGED_BRIE, sellIn, quality) {
-
-        override fun update() {
-            this.decreaseDaysByOne()
-            this.computeQuality()
-        }
-
-        override fun computeQuality() {
-            this.increaseQualityBy(1)
-            if (this.isExpired()) this.increaseQualityBy(1)
+    override fun computeQuality() {
+        if (this.isExpired()) {
+            this.decreaseQualityBy(2)
+        } else {
+            this.decreaseQualityBy(1)
         }
     }
+}
 
-    data class Backstage(override var sellIn: Int, override var quality: Int) :
-        BaseItem(BACKSTAGE, sellIn, quality) {
-        override fun update() {
-            this.decreaseDaysByOne()
-            this.computeQuality()
-        }
+data class AgedBrie(override var sellIn: Int, override var quality: Int) : BaseItem(AGED_BRIE, sellIn, quality) {
 
-        override fun computeQuality() {
-            if (this.sellIn < 6) {
-                this.increaseQualityBy(3)
-            } else if (this.sellIn < 11) {
-                this.increaseQualityBy(2)
-            } else {
-                this.increaseQualityBy(1)
-            }
-
-            if (this.isExpired()) this.quality = 0
-        }
+    override fun update() {
+        this.decreaseDaysByOne()
+        this.computeQuality()
     }
 
-    data class Sulfuras(override var sellIn: Int, override var quality: Int) :
-        BaseItem(SULFURAS, sellIn, quality) {
-        override fun update() {
-            this.computeQuality()
-        }
+    override fun computeQuality() {
+        this.increaseQualityBy(1)
+        if (this.isExpired()) this.increaseQualityBy(1)
+    }
+}
 
-        override fun computeQuality() {
+data class Backstage(override var sellIn: Int, override var quality: Int) : BaseItem(BACKSTAGE, sellIn, quality) {
+    override fun update() {
+        this.decreaseDaysByOne()
+        this.computeQuality()
+    }
+
+    override fun computeQuality() {
+        if (this.sellIn < 6) {
+            this.increaseQualityBy(3)
+        } else if (this.sellIn < 11) {
+            this.increaseQualityBy(2)
+        } else {
             this.increaseQualityBy(1)
         }
+
+        if (this.isExpired()) this.quality = 0
+    }
+}
+
+data class Sulfuras(override var sellIn: Int) : BaseItem(SULFURAS, sellIn, quality = 80) {
+    override fun update() {
+        this.computeQuality()
+    }
+
+    override fun computeQuality() {
+        this.increaseQualityBy(1)
     }
 }

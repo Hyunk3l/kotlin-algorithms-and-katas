@@ -128,12 +128,7 @@ class GildedRoseShould {
 
     @Test
     fun `not increase quality of Sulfuras, must be always 80`() {
-        val items = listOf(
-            Sulfuras(
-                sellIn = 10,
-                quality = 80
-            )
-        )
+        val items = listOf(Sulfuras(sellIn = 10))
         val gilded = GildedRose(items = items)
 
         gilded.updateQuality()
