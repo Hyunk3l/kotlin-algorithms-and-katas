@@ -13,21 +13,27 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
         BaseItem(name, sellIn, quality) {
         override fun update() {
             this.decreaseDaysByOne()
+            this.decreaseQualityByOne()
         }
     }
 
     data class AgedBrie(override var sellIn: Int, override var quality: Int) :
         BaseItem(AGED_BRIE, sellIn, quality) {
+
         override fun update() {
             this.decreaseDaysByOne()
+
+            if (this.quality < MAX_QUALITY) {
+                this.increaseQualityByOne()
+            }
         }
     }
 
     data class Backstage(override var sellIn: Int, override var quality: Int) :
         BaseItem(BACKSTAGE, sellIn, quality) {
         override fun update() {
-            if (this.quality > MAX_QUALITY) {
-                return
+            if (this.quality < MAX_QUALITY) {
+                this.increaseQualityByOne()
             }
             if (this.sellIn < 11) {
                 if (this.quality < MAX_QUALITY) {
@@ -48,13 +54,11 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     data class Sulfuras(override var sellIn: Int, override var quality: Int) :
         BaseItem(SULFURAS, sellIn, quality) {
         override fun update() {
-
+            if (this.quality < MAX_QUALITY) {
+                this.increaseQualityByOne()
+            }
         }
     }
-
-    fun isSpecialItem(): Boolean = this.name == AGED_BRIE
-            || this.name == BACKSTAGE
-            || this.name == SULFURAS
 
     fun decreaseQualityByOne() {
         if (this.quality > 0) {

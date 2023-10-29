@@ -10,13 +10,6 @@ class GildedRose(var items: List<BaseItem>) {
     fun updateQuality() {
 
         items.forEach {
-            if (!it.isSpecialItem()) {
-                it.decreaseQualityByOne()
-            } else {
-                if (it.quality < MAX_QUALITY) {
-                    it.increaseQualityByOne()
-                }
-            }
 
             it.update()
 
