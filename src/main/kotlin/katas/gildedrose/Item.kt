@@ -10,14 +10,14 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     data class Item(override var name: String, override var sellIn: Int, override var quality: Int) :
         BaseItem(name, sellIn, quality)
 
-    data class AgedBrie(override var name: String = AGED_BRIE, override var sellIn: Int, override var quality: Int) :
-        BaseItem(name, sellIn, quality)
+    data class AgedBrie(override var sellIn: Int, override var quality: Int) :
+        BaseItem(AGED_BRIE, sellIn, quality)
 
-    data class Backstage(override var name: String = BACKSTAGE, override var sellIn: Int, override var quality: Int) :
-        BaseItem(name, sellIn, quality)
+    data class Backstage(override var sellIn: Int, override var quality: Int) :
+        BaseItem(BACKSTAGE, sellIn, quality)
 
-    data class Sulfuras(override var name: String = SULFURAS, override var sellIn: Int, override var quality: Int) :
-        BaseItem(name, sellIn, quality)
+    data class Sulfuras(override var sellIn: Int, override var quality: Int) :
+        BaseItem(SULFURAS, sellIn, quality)
 
     fun isSpecialItem(): Boolean = this.name == AGED_BRIE
             || this.name == BACKSTAGE
