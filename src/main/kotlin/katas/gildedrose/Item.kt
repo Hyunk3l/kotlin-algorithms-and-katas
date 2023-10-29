@@ -26,6 +26,21 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     data class Backstage(override var sellIn: Int, override var quality: Int) :
         BaseItem(BACKSTAGE, sellIn, quality) {
         override fun update() {
+            if (this.quality > MAX_QUALITY) {
+                return
+            }
+            if (this.sellIn < 11) {
+                if (this.quality < MAX_QUALITY) {
+                    this.quality++
+                }
+            }
+
+            if (this.sellIn < 6) {
+                if (this.quality < MAX_QUALITY) {
+                    this.quality++
+                }
+            }
+
             this.decreaseDaysByOne()
         }
     }

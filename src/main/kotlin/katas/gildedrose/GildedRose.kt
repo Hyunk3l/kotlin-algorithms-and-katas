@@ -15,20 +15,6 @@ class GildedRose(var items: List<BaseItem>) {
             } else {
                 if (it.quality < MAX_QUALITY) {
                     it.increaseQualityByOne()
-
-                    if (it.name == BACKSTAGE) {
-                        if (it.sellIn < 11) {
-                            if (it.quality < MAX_QUALITY) {
-                                it.quality += 1
-                            }
-                        }
-
-                        if (it.sellIn < 6) {
-                            if (it.quality < MAX_QUALITY) {
-                                it.quality += 1
-                            }
-                        }
-                    }
                 }
             }
 
