@@ -37,20 +37,16 @@ class GildedRose(var items: List<BaseItem>) {
             }
 
             if (it.isItemExpired()) {
-                if (it.name != AGED_BRIE) {
-                    if (it.name != BACKSTAGE) {
-                        if (it.quality > 0) {
-                            if (it.name != SULFURAS) {
-                                it.quality -= 1
-                            }
+                if (it.name == AGED_BRIE && it.quality < MAX_QUALITY) {
+                    it.quality += 1
+                } else if (it.name != BACKSTAGE) {
+                    if (it.quality > 0) {
+                        if (it.name != SULFURAS) {
+                            it.quality -= 1
                         }
-                    } else {
-                        it.quality = 0
                     }
                 } else {
-                    if (it.quality < MAX_QUALITY) {
-                        it.quality += 1
-                    }
+                    it.quality = 0
                 }
             }
         }
