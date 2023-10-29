@@ -9,12 +9,21 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
 
     abstract fun update()
 
+    abstract fun computeQuality()
+
     data class Item(override var name: String, override var sellIn: Int, override var quality: Int) :
         BaseItem(name, sellIn, quality) {
         override fun update() {
             this.decreaseDaysByOne()
-            this.decreaseQualityByOne()
-            if (this.isItemExpired()) this.decreaseQualityByOne()
+            this.computeQuality()
+        }
+
+        override fun computeQuality() {
+            if (this.isItemExpired()) {
+                this.decreaseQualityBy(2)
+            } else {
+                this.decreaseQualityBy(1)
+            }
         }
     }
 
@@ -23,7 +32,10 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
 
         override fun update() {
             this.decreaseDaysByOne()
+            this.computeQuality()
+        }
 
+        override fun computeQuality() {
             if (this.quality < MAX_QUALITY) {
                 this.increaseQualityByOne()
             }
@@ -35,6 +47,11 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     data class Backstage(override var sellIn: Int, override var quality: Int) :
         BaseItem(BACKSTAGE, sellIn, quality) {
         override fun update() {
+            this.decreaseDaysByOne()
+            this.computeQuality()
+        }
+
+        override fun computeQuality() {
             if (this.quality < MAX_QUALITY) {
                 this.increaseQualityByOne()
             }
@@ -50,7 +67,6 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
                 }
             }
 
-            this.decreaseDaysByOne()
             if (this.isItemExpired()) this.quality = 0
         }
     }
@@ -58,15 +74,19 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     data class Sulfuras(override var sellIn: Int, override var quality: Int) :
         BaseItem(SULFURAS, sellIn, quality) {
         override fun update() {
+            this.computeQuality()
+        }
+
+        override fun computeQuality() {
             if (this.quality < MAX_QUALITY) {
-                this.increaseQualityByOne()
+                this.quality++
             }
         }
     }
 
-    fun decreaseQualityByOne() {
+    fun decreaseQualityBy(number: Int) {
         if (this.quality > 0) {
-            this.quality--
+            this.quality -= number
         }
     }
 
