@@ -14,7 +14,7 @@ class GildedRose(var items: List<Item>) {
                 it.decreaseQualityByOne()
             } else {
                 if (it.quality < MAX_QUALITY) {
-                    it.quality += 1
+                    it.increaseQualityByOne()
 
                     if (it.name == BACKSTAGE) {
                         if (it.sellIn < 11) {
