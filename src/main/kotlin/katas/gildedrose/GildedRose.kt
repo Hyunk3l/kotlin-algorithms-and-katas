@@ -15,7 +15,6 @@ class GildedRose(var items: List<BaseItem>) {
 
             if (it.isItemExpired()) {
                 if (it.name == AGED_BRIE && it.quality < MAX_QUALITY) {
-                    it.quality++
                 } else if (it.name != BACKSTAGE) {
                     if (it.quality > 0) {
                         if (it.name != SULFURAS) {
