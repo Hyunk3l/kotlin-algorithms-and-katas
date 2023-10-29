@@ -1,6 +1,7 @@
 package katas.gildedrose
 
 import io.kotest.matchers.shouldBe
+import katas.gildedrose.BaseItem.*
 import org.junit.jupiter.api.Test
 
 class GildedRoseShould {
