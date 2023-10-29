@@ -11,9 +11,7 @@ class GildedRose(var items: List<Item>) {
 
         items.forEach {
             if (!it.isSpecialItem()) {
-                if (it.quality > 0) {
-                    it.quality -= 1
-                }
+                it.decreaseQualityByOne()
             } else {
                 if (it.quality < MAX_QUALITY) {
                     it.quality += 1

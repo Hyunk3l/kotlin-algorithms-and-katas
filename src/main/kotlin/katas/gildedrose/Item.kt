@@ -9,4 +9,10 @@ open class Item(var name: String, var sellIn: Int, var quality: Int) {
     fun isSpecialItem(): Boolean = this.name == AGED_BRIE
             || this.name == BACKSTAGE
             || this.name == SULFURAS
+
+    fun decreaseQualityByOne() {
+        if (this.quality > 0) {
+            this.quality--
+        }
+    }
 }
