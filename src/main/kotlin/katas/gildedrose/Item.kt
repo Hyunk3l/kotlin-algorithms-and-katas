@@ -18,7 +18,7 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
         if (this.quality > 0) this.quality -= number
     }
 
-    protected fun decreaseDaysByOne() {
+    private fun decreaseDaysByOne() {
         this.sellIn--
     }
 
