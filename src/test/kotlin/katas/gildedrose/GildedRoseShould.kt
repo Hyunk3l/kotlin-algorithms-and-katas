@@ -37,6 +37,7 @@ class GildedRoseShould {
 
         items[0].quality shouldBe 48
         items[0].name shouldBe "Mozzarella"
+        items[0].sellIn shouldBe -1
     }
 
     @Test

@@ -21,8 +21,6 @@ class GildedRose(var items: List<BaseItem>) {
                             it.quality--
                         }
                     }
-                } else {
-                    it.quality = 0
                 }
             }
         }

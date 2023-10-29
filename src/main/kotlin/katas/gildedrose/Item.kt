@@ -50,6 +50,7 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
             }
 
             this.decreaseDaysByOne()
+            if (this.isItemExpired()) this.quality = 0
         }
     }
 
