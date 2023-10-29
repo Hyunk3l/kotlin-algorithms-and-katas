@@ -7,7 +7,10 @@ private const val SULFURAS = "Sulfuras, Hand of Ragnaros"
 
 sealed class BaseItem(open var name: String, open var sellIn: Int, open var quality: Int) {
 
-    abstract fun update()
+    open fun update() {
+        this.decreaseDaysByOne()
+        this.computeQuality()
+    }
 
     abstract fun computeQuality()
 
@@ -29,11 +32,6 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
 data class Item(override var name: String, override var sellIn: Int, override var quality: Int) :
     BaseItem(name, sellIn, quality) {
 
-    override fun update() {
-        this.decreaseDaysByOne()
-        this.computeQuality()
-    }
-
     override fun computeQuality() {
         if (this.isExpired()) {
             this.decreaseQualityBy(2)
@@ -45,11 +43,6 @@ data class Item(override var name: String, override var sellIn: Int, override va
 
 data class AgedBrie(override var sellIn: Int, override var quality: Int) : BaseItem(AGED_BRIE, sellIn, quality) {
 
-    override fun update() {
-        this.decreaseDaysByOne()
-        this.computeQuality()
-    }
-
     override fun computeQuality() {
         this.increaseQualityBy(1)
         if (this.isExpired()) this.increaseQualityBy(1)
@@ -57,10 +50,6 @@ data class AgedBrie(override var sellIn: Int, override var quality: Int) : BaseI
 }
 
 data class Backstage(override var sellIn: Int, override var quality: Int) : BaseItem(BACKSTAGE, sellIn, quality) {
-    override fun update() {
-        this.decreaseDaysByOne()
-        this.computeQuality()
-    }
 
     override fun computeQuality() {
         if (this.sellIn < 6) {
