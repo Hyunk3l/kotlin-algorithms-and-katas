@@ -10,11 +10,9 @@ class GildedRose(var items: List<Item>) {
     fun updateQuality() {
 
         items.forEach {
-            if (it.name != AGED_BRIE && it.name != BACKSTAGE) {
+            if (!it.isSpecialItem()) {
                 if (it.quality > 0) {
-                    if (it.name != SULFURAS) {
-                        it.quality -= 1
-                    }
+                    it.quality -= 1
                 }
             } else {
                 if (it.quality < MAX_QUALITY) {
