@@ -51,10 +51,8 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
 
         override fun computeQuality() {
             this.increaseQualityByOne()
-            if (this.sellIn < 11) {
-                if (this.quality < MAX_QUALITY) {
-                    this.quality++
-                }
+            if (this.sellIn < 11 && this.quality < MAX_QUALITY) {
+                this.quality++
             }
 
             if (this.sellIn < 6) {
@@ -74,9 +72,7 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
         }
 
         override fun computeQuality() {
-            if (this.quality < MAX_QUALITY) {
-                this.quality++
-            }
+            this.increaseQualityByOne()
         }
     }
 
@@ -91,9 +87,7 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
     }
 
     fun increaseQualityByOne() {
-        if (this.quality < MAX_QUALITY) {
-            this.quality++
-        }
+        if (this.quality < MAX_QUALITY) this.quality++
     }
 
     fun isItemExpired(): Boolean = this.sellIn < 0
