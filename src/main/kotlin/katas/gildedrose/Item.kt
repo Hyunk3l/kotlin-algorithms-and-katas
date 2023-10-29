@@ -14,6 +14,7 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
         override fun update() {
             this.decreaseDaysByOne()
             this.decreaseQualityByOne()
+            if (this.isItemExpired()) this.decreaseQualityByOne()
         }
     }
 

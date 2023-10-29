@@ -8,21 +8,6 @@ private const val SULFURAS = "Sulfuras, Hand of Ragnaros"
 class GildedRose(var items: List<BaseItem>) {
 
     fun updateQuality() {
-
-        items.forEach {
-
-            it.update()
-
-            if (it.isItemExpired()) {
-                if (it.name == AGED_BRIE && it.quality < MAX_QUALITY) {
-                } else if (it.name != BACKSTAGE) {
-                    if (it.quality > 0) {
-                        if (it.name != SULFURAS) {
-                            it.quality--
-                        }
-                    }
-                }
-            }
-        }
+        items.forEach { it.update() }
     }
 }
