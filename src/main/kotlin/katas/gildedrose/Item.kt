@@ -15,4 +15,6 @@ open class Item(var name: String, var sellIn: Int, var quality: Int) {
             this.quality--
         }
     }
+
+    fun isItemExpired(): Boolean = this.sellIn < 0
 }

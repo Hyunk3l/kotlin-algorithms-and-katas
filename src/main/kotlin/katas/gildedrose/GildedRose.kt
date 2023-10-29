@@ -36,7 +36,7 @@ class GildedRose(var items: List<Item>) {
                 it.sellIn -= 1
             }
 
-            if (it.sellIn < 0) {
+            if (it.isItemExpired()) {
                 if (it.name != AGED_BRIE) {
                     if (it.name != BACKSTAGE) {
                         if (it.quality > 0) {
