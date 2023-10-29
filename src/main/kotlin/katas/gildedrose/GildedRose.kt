@@ -33,7 +33,7 @@ class GildedRose(var items: List<BaseItem>) {
             }
 
             if (it.name != SULFURAS) {
-                it.sellIn -= 1
+                it.decreaseDaysByOne()
             }
 
             if (it.isItemExpired()) {

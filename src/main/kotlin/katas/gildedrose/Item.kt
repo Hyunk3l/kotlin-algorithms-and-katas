@@ -29,6 +29,10 @@ sealed class BaseItem(open var name: String, open var sellIn: Int, open var qual
         }
     }
 
+    fun decreaseDaysByOne() {
+        this.sellIn--
+    }
+
     fun increaseQualityByOne() {
         if (this.quality < MAX_QUALITY) {
             this.quality++
