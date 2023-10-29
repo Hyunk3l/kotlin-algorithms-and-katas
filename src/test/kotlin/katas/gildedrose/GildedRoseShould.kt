@@ -60,8 +60,7 @@ class GildedRoseShould {
     @Test
     fun `increase quality of the Aged Brie`() {
         val items = listOf(
-            Item(
-                name = "Aged Brie",
+            AgedBrie(
                 sellIn = 10,
                 quality = 10
             )
@@ -78,8 +77,7 @@ class GildedRoseShould {
     @Test
     fun `not update quality by more than 50`() {
         val items = listOf(
-            Item(
-                name = "Aged Brie",
+            AgedBrie(
                 sellIn = 10,
                 quality = 50
             )
@@ -96,8 +94,7 @@ class GildedRoseShould {
     @Test
     fun `increase quality by 3 if 5 or less days left`() {
         val items = listOf(
-            Item(
-                name = "Backstage passes to a TAFKAL80ETC concert",
+            Backstage(
                 sellIn = 5,
                 quality = 10
             )
@@ -114,8 +111,7 @@ class GildedRoseShould {
     @Test
     fun `increase quality by 2 if 10 or less days left`() {
         val items = listOf(
-            Item(
-                name = "Backstage passes to a TAFKAL80ETC concert",
+            Backstage(
                 sellIn = 10,
                 quality = 10
             )
@@ -132,8 +128,7 @@ class GildedRoseShould {
     @Test
     fun `not increase quality of Sulfuras, must be always 80`() {
         val items = listOf(
-            Item(
-                name = "Sulfuras, Hand of Ragnaros",
+            Sulfuras(
                 sellIn = 10,
                 quality = 80
             )
@@ -150,8 +145,7 @@ class GildedRoseShould {
     @Test
     fun `decrease quality to 0 if less than 0 sell in days for Backstage passes to a TAFKAL80ETC concert`() {
         val items = listOf(
-            Item(
-                name = "Backstage passes to a TAFKAL80ETC concert",
+            Backstage(
                 sellIn = -1,
                 quality = 5
             )
@@ -168,8 +162,7 @@ class GildedRoseShould {
     @Test
     fun `increase quality if Aged Brie sell in is less than 0`() {
         val items = listOf(
-            Item(
-                name = "Aged Brie",
+            AgedBrie(
                 sellIn = -1,
                 quality = 5
             )
