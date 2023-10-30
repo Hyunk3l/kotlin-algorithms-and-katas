@@ -170,4 +170,21 @@ class GildedRoseShould {
         items[0].sellIn shouldBe -2
         items[0].quality shouldBe 7
     }
+
+    @Test
+    fun `decrease quality twice faster for items Conjured`() {
+        val items = listOf(
+            Conjured(
+                sellIn = 10,
+                quality = 10
+            )
+        )
+        val gilded = GildedRose(items = items)
+
+        gilded.updateQuality()
+
+        items[0].name shouldBe "Conjured"
+        items[0].sellIn shouldBe 9
+        items[0].quality shouldBe 8
+    }
 }

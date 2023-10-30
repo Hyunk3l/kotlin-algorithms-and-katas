@@ -4,6 +4,7 @@ private const val MAX_QUALITY = 50
 private const val AGED_BRIE = "Aged Brie"
 private const val BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
 private const val SULFURAS = "Sulfuras, Hand of Ragnaros"
+private const val CONJURED = "Conjured"
 
 sealed class Item(open var name: String, open var sellIn: Int, open var quality: Int) {
 
@@ -71,5 +72,11 @@ data class Sulfuras(override var sellIn: Int) : Item(SULFURAS, sellIn, quality =
 
     override fun computeQuality() {
         this.increaseQualityBy(1)
+    }
+}
+
+data class Conjured(override var sellIn: Int, override var quality: Int): Item(CONJURED, sellIn, quality) {
+    override fun computeQuality() {
+        this.decreaseQualityBy(2)
     }
 }
