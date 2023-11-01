@@ -6,7 +6,7 @@ interface Sensor {
     fun popNextValue(): Double
 }
 
-class TemperatureSensor : Sensor {
+class TyrePressureSensor : Sensor {
     override fun popNextValue(): Double {
         val pressureTelemetryValue = samplePressure()
 
