@@ -5,7 +5,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlin.test.Test
 
-private val sensor = mockk<TemperatureSensor>()
+private val sensor = mockk<Sensor>()
 
 class AlarmShould {
 

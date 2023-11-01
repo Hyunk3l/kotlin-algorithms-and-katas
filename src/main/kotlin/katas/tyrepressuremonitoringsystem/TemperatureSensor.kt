@@ -3,14 +3,12 @@ package katas.tyrepressuremonitoringsystem
 import java.util.*
 
 interface Sensor {
-    fun <T> popNextValue(): T
+    fun popNextValue(): Double
 }
 
-class TemperatureSensor {
-
-    fun popNextValue(): Double {
-        val pressureTelemetryValue: Double
-        pressureTelemetryValue = samplePressure()
+class TemperatureSensor : Sensor {
+    override fun popNextValue(): Double {
+        val pressureTelemetryValue = samplePressure()
 
         return OFFSET + pressureTelemetryValue
     }
