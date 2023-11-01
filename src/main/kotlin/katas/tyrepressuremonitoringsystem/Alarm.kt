@@ -8,11 +8,12 @@ class Alarm(private val sensor: Sensor) {
     var isAlarmOn = false
         internal set
 
-    fun check() {
+    fun check(): Boolean {
         val psiPressureValue = sensor.popNextValue()
 
         if (psiPressureValue < LOW_PRESSURE_THRESHOLD || HIGH_PRESSURE_THRESHOLD < psiPressureValue) {
             isAlarmOn = true
         }
+        return isAlarmOn
     }
 }

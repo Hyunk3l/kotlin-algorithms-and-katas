@@ -11,9 +11,10 @@ class AlarmShould {
 
     @Test
     fun `be deactivated by default`() {
+        every { sensor.popNextValue() } returns 17.0
         val alarm = Alarm(sensor = sensor)
 
-        alarm.isAlarmOn shouldBe false
+        alarm.check() shouldBe false
     }
 
     @Test
@@ -21,9 +22,7 @@ class AlarmShould {
         every { sensor.popNextValue() } returns 22.0
         val alarm = Alarm(sensor)
 
-        alarm.check()
-
-        alarm.isAlarmOn shouldBe true
+        alarm.check() shouldBe true
     }
 
     @Test
@@ -31,8 +30,6 @@ class AlarmShould {
         every { sensor.popNextValue() } returns 16.0
         val alarm = Alarm(sensor)
 
-        alarm.check()
-
-        alarm.isAlarmOn shouldBe true
+        alarm.check() shouldBe true
     }
 }
