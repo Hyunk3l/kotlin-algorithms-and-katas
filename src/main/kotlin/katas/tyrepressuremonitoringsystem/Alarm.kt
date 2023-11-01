@@ -9,7 +9,7 @@ class Alarm(private val sensor: TemperatureSensor) {
         internal set
 
     fun check() {
-        val psiPressureValue = sensor.popNextPressurePsiValue()
+        val psiPressureValue = sensor.popNextValue()
 
         if (psiPressureValue < LOW_PRESSURE_THRESHOLD || HIGH_PRESSURE_THRESHOLD < psiPressureValue) {
             isAlarmOn = true

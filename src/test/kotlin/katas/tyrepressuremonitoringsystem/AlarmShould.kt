@@ -18,7 +18,7 @@ class AlarmShould {
 
     @Test
     fun `be active if pressure is above threshold`() {
-        every { sensor.popNextPressurePsiValue() } returns 22.0
+        every { sensor.popNextValue() } returns 22.0
         val alarm = Alarm(sensor)
 
         alarm.check()
@@ -28,7 +28,7 @@ class AlarmShould {
 
     @Test
     fun `be active if pressure is below threshold`() {
-        every { sensor.popNextPressurePsiValue() } returns 16.0
+        every { sensor.popNextValue() } returns 16.0
         val alarm = Alarm(sensor)
 
         alarm.check()
