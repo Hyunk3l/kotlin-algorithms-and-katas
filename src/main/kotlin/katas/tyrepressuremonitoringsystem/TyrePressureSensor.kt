@@ -1,25 +1,18 @@
 package katas.tyrepressuremonitoringsystem
 
-import java.util.*
+import java.util.Random
 
-interface Sensor {
-    fun popNextValue(): Double
-}
+private const val OFFSET = 16.0
 
-class TyrePressureSensor : Sensor {
+class TyrePressureSensor(private val random: Random) : Sensor {
     override fun popNextValue(): Double {
         val pressureTelemetryValue = samplePressure()
 
         return OFFSET + pressureTelemetryValue
     }
 
-    companion object {
-        val OFFSET = 16.0
-
-        private fun samplePressure(): Double {
-            // placeholder implementation that simulate a real sensor in a real tire
-            val basicRandomNumbersGenerator = Random()
-            return 6.0 * basicRandomNumbersGenerator.nextDouble() * basicRandomNumbersGenerator.nextDouble()
-        }
+    private fun samplePressure(): Double {
+        // placeholder implementation that simulate a real sensor in a real tire
+        return 6.0 * random.nextDouble() * random.nextDouble()
     }
 }
