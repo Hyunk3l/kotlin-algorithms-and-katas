@@ -1,5 +1,5 @@
 package katas.tyrepressuremonitoringsystem
 
-interface Sensor {
-    fun popNextValue(): Double
+interface Sensor<T> {
+    fun popNextValue(): T
 }
