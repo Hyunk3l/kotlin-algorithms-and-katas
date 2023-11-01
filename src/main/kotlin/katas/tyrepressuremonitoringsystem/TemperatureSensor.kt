@@ -2,7 +2,7 @@ package katas.tyrepressuremonitoringsystem
 
 import java.util.*
 
-class Sensor {
+class TemperatureSensor {
 
     fun popNextPressurePsiValue(): Double {
         val pressureTelemetryValue: Double

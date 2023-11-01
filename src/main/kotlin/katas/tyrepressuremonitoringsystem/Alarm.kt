@@ -1,10 +1,9 @@
 package katas.tyrepressuremonitoringsystem
 
-class Alarm {
-    private val LowPressureThreshold = 17.0
-    private val HighPressureThreshold = 21.0
+private const val LOW_PRESSURE_THRESHOLD = 17.0
+private const val HIGH_PRESSURE_THRESHOLD = 21.0
 
-    internal var sensor = Sensor()
+class Alarm(private val sensor: TemperatureSensor) {
 
     var isAlarmOn = false
         internal set
@@ -12,7 +11,7 @@ class Alarm {
     fun check() {
         val psiPressureValue = sensor.popNextPressurePsiValue()
 
-        if (psiPressureValue < LowPressureThreshold || HighPressureThreshold < psiPressureValue) {
+        if (psiPressureValue < LOW_PRESSURE_THRESHOLD || HIGH_PRESSURE_THRESHOLD < psiPressureValue) {
             isAlarmOn = true
         }
     }

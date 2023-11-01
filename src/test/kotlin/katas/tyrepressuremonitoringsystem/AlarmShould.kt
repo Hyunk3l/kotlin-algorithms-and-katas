@@ -1,13 +1,38 @@
 package katas.tyrepressuremonitoringsystem
 
+import io.kotest.matchers.shouldBe
+import io.mockk.every
+import io.mockk.mockk
 import kotlin.test.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+
+private val sensor = mockk<TemperatureSensor>()
 
 class AlarmShould {
 
     @Test
-    fun foo() {
-        val alarm = Alarm()
-        assertEquals(false, alarm.isAlarmOn)
+    fun `be deactivated by default`() {
+        val alarm = Alarm(sensor = sensor)
+
+        alarm.isAlarmOn shouldBe false
+    }
+
+    @Test
+    fun `be active if pressure is above threshold`() {
+        every { sensor.popNextPressurePsiValue() } returns 22.0
+        val alarm = Alarm(sensor)
+
+        alarm.check()
+
+        alarm.isAlarmOn shouldBe true
+    }
+
+    @Test
+    fun `be active if pressure is below threshold`() {
+        every { sensor.popNextPressurePsiValue() } returns 16.0
+        val alarm = Alarm(sensor)
+
+        alarm.check()
+
+        alarm.isAlarmOn shouldBe true
     }
 }
