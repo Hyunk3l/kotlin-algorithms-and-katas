@@ -1,4 +1,4 @@
-package katas.tyrepressuresystem
+package katas.tyrepressuremonitoringsystem
 
 import kotlin.test.Test
 import org.junit.jupiter.api.Assertions.assertEquals

@@ -1,4 +1,4 @@
-package katas.tyrepressuresystem
+package katas.tyrepressuremonitoringsystem
 
 import java.util.*
 

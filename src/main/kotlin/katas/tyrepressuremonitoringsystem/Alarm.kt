@@ -1,4 +1,4 @@
-package katas.tyrepressuresystem
+package katas.tyrepressuremonitoringsystem
 
 class Alarm {
     private val LowPressureThreshold = 17.0
