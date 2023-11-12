@@ -14,7 +14,7 @@ class HtmlTextConverterTest {
     }
 
     @Test
-    fun `should get content from file`() {
+    fun `should convert text to html`() {
         val filename = "src/test/resources/to-convert-to-html.txt"
         val converter = HtmlTextConverter(filename)
 
@@ -22,6 +22,30 @@ class HtmlTextConverterTest {
 
         result shouldBe """
             aaa<br />bbb<br />ccc<br />
+        """.trimIndent()
+    }
+
+    @Test
+    fun `should convert text with special chars to html`() {
+        val filename = "src/test/resources/to-convert-to-html-special-chars.txt"
+        val converter = HtmlTextConverter(filename)
+
+        val result = converter.convertToHtml()
+
+        result shouldBe """
+            aaà<br />ñññ<br />
+        """.trimIndent()
+    }
+
+    @Test
+    fun `should convert text with html to html`() {
+        val filename = "src/test/resources/to-convert-to-html-with-html.txt"
+        val converter = HtmlTextConverter(filename)
+
+        val result = converter.convertToHtml()
+
+        result shouldBe """
+            &lt;p&gt;aaa&lt;/p&gt;<br />bbb<br />
         """.trimIndent()
     }
 }
