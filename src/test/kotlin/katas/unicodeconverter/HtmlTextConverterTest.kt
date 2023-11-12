@@ -48,4 +48,14 @@ class HtmlTextConverterTest {
             &lt;p&gt;aaa&lt;/p&gt;<br />bbb<br />
         """.trimIndent()
     }
+
+    @Test
+    fun `should convert empty text to html`() {
+        val filename = "src/test/resources/empty.txt"
+        val converter = HtmlTextConverter(filename)
+
+        val result = converter.convertToHtml()
+
+        result shouldBe ""
+    }
 }
