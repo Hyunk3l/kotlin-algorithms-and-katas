@@ -19,6 +19,5 @@ class HtmlTextConverter(val filename: String) {
             line = reader.readLine()
         }
         return html
-
     }
 }
