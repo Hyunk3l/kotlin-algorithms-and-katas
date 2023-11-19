@@ -2,7 +2,6 @@ package katas.unicodeconverter
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
-import java.io.IOException
 import org.junit.jupiter.api.Test
 
 class HtmlTextConverterTest {
@@ -66,7 +65,7 @@ class HtmlTextConverterTest {
         val filename = "src/test/resources/no-file.txt"
         val converter = HtmlTextConverter(filename)
 
-        shouldThrow<IOException> {
+        shouldThrow<ReadingError> {
             converter.convertToHtml()
         }
     }
