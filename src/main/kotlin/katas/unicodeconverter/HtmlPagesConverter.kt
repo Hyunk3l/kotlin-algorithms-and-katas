@@ -6,11 +6,10 @@ import java.io.IOException
 import java.util.ArrayList
 
 class HtmlPagesConverter @Throws(IOException::class)
-constructor(val filename: String) {
+constructor(private val filename: String) {
     private val breaks = ArrayList<Int>()
 
     init {
-
         this.breaks.add(0)
         val reader = BufferedReader(FileReader(this.filename))
         var cumulativeCharCount = 0
@@ -18,8 +17,7 @@ constructor(val filename: String) {
         while (line != null) {
             cumulativeCharCount += line.length + 1 // add one for the newline
             if (line.contains("PAGE_BREAK")) {
-                val page_break_position = cumulativeCharCount
-                breaks.add(page_break_position)
+                breaks.add(cumulativeCharCount)
             }
             line = reader.readLine()
         }
