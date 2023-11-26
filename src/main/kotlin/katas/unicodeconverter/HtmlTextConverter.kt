@@ -26,5 +26,3 @@ class HtmlTextConverter(val filename: String) {
     private fun buildHtml(html: String, line: String?) =
         html + StringEscapeUtils.escapeHtml(line!!) + "<br />"
 }
-
-class ReadingError(message: String?) : RuntimeException(message)

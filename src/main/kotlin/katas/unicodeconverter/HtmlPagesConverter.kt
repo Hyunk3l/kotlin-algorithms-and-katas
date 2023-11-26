@@ -3,21 +3,25 @@ package katas.unicodeconverter
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
-import java.util.ArrayList
 
 class HtmlPagesConverter @Throws(IOException::class)
-constructor(private val filename: String) {
-    private val breaks = ArrayList<Int>()
+constructor(filename: String) {
+    private val content = HashMap<Int, List<String>>()
 
     init {
-        this.breaks.add(0)
-        val reader = BufferedReader(FileReader(this.filename))
-        var cumulativeCharCount = 0
+        val reader = try {
+            BufferedReader(FileReader(filename))
+        } catch (exception: IOException) {
+            throw ReadingError(exception.message)
+        }
+
+        var currentPage = 0
         var line: String? = reader.readLine()
         while (line != null) {
-            cumulativeCharCount += line.length + 1 // add one for the newline
-            if (line.contains("PAGE_BREAK")) {
-                breaks.add(cumulativeCharCount)
+            if (line == "PAGE_BREAK") {
+                currentPage++
+            } else {
+                content[currentPage] = content.getOrDefault(currentPage, emptyList()) + line
             }
             line = reader.readLine()
         }
@@ -26,20 +30,17 @@ constructor(private val filename: String) {
 
     @Throws(IOException::class)
     fun getHtmlPage(page: Int): String {
-        val reader = BufferedReader(FileReader(this.filename))
-        reader.skip(breaks[page].toLong())
-        val htmlPage = StringBuffer()
-        var line: String? = reader.readLine()
-        while (line != null) {
-            if (line.contains("PAGE_BREAK")) {
-                break
-            }
-            htmlPage.append(StringEscapeUtils.escapeHtml(line))
-            htmlPage.append("<br />")
+        val pageContent = content[page] ?: throw PageNotFoundError("Page $page not found")
 
-            line = reader.readLine()
+        val htmlPage = StringBuffer()
+
+        pageContent.forEach { singleLine ->
+            if (!singleLine.contains("PAGE_BREAK")) {
+                htmlPage.append(StringEscapeUtils.escapeHtml(singleLine))
+                htmlPage.append("<br />")
+            }
         }
-        reader.close()
+
         return htmlPage.toString()
     }
 }
