@@ -4,8 +4,7 @@ import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
 
-class HtmlPagesConverter @Throws(IOException::class)
-constructor(filename: String) {
+class HtmlPagesConverter(filename: String) {
     private val content = HashMap<Int, List<String>>()
 
     init {
@@ -28,7 +27,6 @@ constructor(filename: String) {
         reader.close()
     }
 
-    @Throws(IOException::class)
     fun getHtmlPage(page: Int): String {
         val pageContent = content[page] ?: throw PageNotFoundError("Page $page not found")
 
