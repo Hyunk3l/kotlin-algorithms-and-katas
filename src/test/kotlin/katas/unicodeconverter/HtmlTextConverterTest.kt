@@ -16,7 +16,7 @@ class HtmlTextConverterTest {
 
     @Test
     fun `should convert text to html`() {
-        val filename = "src/test/resources/to-convert-to-html.txt"
+        val filename = "src/test/resources/text-to-html/to-convert-to-html.txt"
         val converter = HtmlTextConverter(filename)
 
         val result = converter.convertToHtml()
@@ -28,7 +28,7 @@ class HtmlTextConverterTest {
 
     @Test
     fun `should convert text with special chars to html`() {
-        val filename = "src/test/resources/to-convert-to-html-special-chars.txt"
+        val filename = "src/test/resources/text-to-html/to-convert-to-html-special-chars.txt"
         val converter = HtmlTextConverter(filename)
 
         val result = converter.convertToHtml()
@@ -40,7 +40,7 @@ class HtmlTextConverterTest {
 
     @Test
     fun `should convert text with html to html`() {
-        val filename = "src/test/resources/to-convert-to-html-with-html.txt"
+        val filename = "src/test/resources/text-to-html/to-convert-to-html-with-html.txt"
         val converter = HtmlTextConverter(filename)
 
         val result = converter.convertToHtml()
@@ -52,7 +52,7 @@ class HtmlTextConverterTest {
 
     @Test
     fun `should convert empty text to html`() {
-        val filename = "src/test/resources/empty.txt"
+        val filename = "src/test/resources/text-to-html/empty.txt"
         val converter = HtmlTextConverter(filename)
 
         val result = converter.convertToHtml()
@@ -62,7 +62,7 @@ class HtmlTextConverterTest {
 
     @Test
     fun `should fail in case file does not exist`() {
-        val filename = "src/test/resources/no-file.txt"
+        val filename = "src/test/resources/text-to-html/no-file.txt"
         val converter = HtmlTextConverter(filename)
 
         shouldThrow<ReadingError> {
