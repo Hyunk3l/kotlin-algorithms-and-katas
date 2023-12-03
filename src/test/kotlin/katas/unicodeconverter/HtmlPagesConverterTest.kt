@@ -10,7 +10,9 @@ class HtmlPagesConverterTest {
 
     @Test
     fun `should convert a simple plain text file into html`() {
-        val converter = HtmlPagesConverter(filename = "$RESOURCES_DIR/simple-text.txt")
+        val filename = "$RESOURCES_DIR/simple-text.txt"
+        val fileReader = FileReaderFromResources(filename = filename)
+        val converter = HtmlPagesConverter(fileReader = fileReader)
 
         val result = converter.getHtmlPage(0)
 
@@ -21,7 +23,9 @@ class HtmlPagesConverterTest {
 
     @Test
     fun `should fail in case is not able to retrieve a non existing page`() {
-        val converter = HtmlPagesConverter(filename = "$RESOURCES_DIR/simple-text.txt")
+        val filename = "$RESOURCES_DIR/simple-text.txt"
+        val fileReader = FileReaderFromResources(filename = filename)
+        val converter = HtmlPagesConverter(fileReader = fileReader)
 
         shouldThrow<PageNotFoundError> {
             converter.getHtmlPage(1)
@@ -30,7 +34,9 @@ class HtmlPagesConverterTest {
 
     @Test
     fun `should convert a 3 pages plain text file into html`() {
-        val converter = HtmlPagesConverter(filename = "$RESOURCES_DIR/simple-text-3-pages.txt")
+        val filename = "$RESOURCES_DIR/simple-text-3-pages.txt"
+        val fileReader = FileReaderFromResources(filename = filename)
+        val converter = HtmlPagesConverter(fileReader = fileReader)
 
         val result = converter.getHtmlPage(2)
 
@@ -41,7 +47,9 @@ class HtmlPagesConverterTest {
 
     @Test
     fun `should be empty in case of empty file`() {
-        val converter = HtmlPagesConverter(filename = "$RESOURCES_DIR/empty-file.txt")
+        val filename = "$RESOURCES_DIR/empty-file.txt"
+        val fileReader = FileReaderFromResources(filename = filename)
+        val converter = HtmlPagesConverter(fileReader = fileReader)
 
         shouldThrow<PageNotFoundError> {
             converter.getHtmlPage(0)
@@ -51,13 +59,17 @@ class HtmlPagesConverterTest {
     @Test
     fun `should fail in case of non-existing file`() {
         shouldThrow<ReadingError> {
-            HtmlPagesConverter(filename = "$RESOURCES_DIR/not-existing-file.txt")
+            val filename = "$RESOURCES_DIR/non-existing-file.txt"
+            val fileReader = FileReaderFromResources(filename = filename)
+            HtmlPagesConverter(fileReader = fileReader)
         }
     }
 
     @Test
     fun `should not convert if it contains a page break`() {
-        val converter = HtmlPagesConverter(filename = "$RESOURCES_DIR/content-break.txt")
+        val filename = "$RESOURCES_DIR/content-break.txt"
+        val fileReader = FileReaderFromResources(filename = filename)
+        val converter = HtmlPagesConverter(fileReader = fileReader)
 
         val result = converter.getHtmlPage(1)
 

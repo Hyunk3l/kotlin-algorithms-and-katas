@@ -6,24 +6,17 @@ import java.io.IOException
 
 private const val PAGE_BREAK = "PAGE_BREAK"
 
-class HtmlPagesConverter(filename: String) {
+class HtmlPagesConverter(fileReader: PersonalFileReader<String>) {
     private val content = HashMap<Int, List<String>>()
 
     init {
-        try {
-            BufferedReader(FileReader(filename)).use { reader ->
-                var currentPage = 0
-                val lines = reader.readLines()
-                lines.forEach { line ->
-                    if (line == PAGE_BREAK) {
-                        currentPage++
-                    } else {
-                        content[currentPage] = content.getOrElse(currentPage) { emptyList() } + line
-                    }
-                }
+        var currentPage = 0
+        fileReader.read().forEach { line ->
+            if (line == PAGE_BREAK) {
+                currentPage++
+            } else {
+                content[currentPage] = content.getOrElse(currentPage) { emptyList() } + line
             }
-        } catch (exception: IOException) {
-            throw ReadingError(exception.message)
         }
     }
 
@@ -41,4 +34,20 @@ class HtmlPagesConverter(filename: String) {
 
         return htmlPage.toString()
     }
+}
+
+class FileReaderFromResources(val filename: String) : PersonalFileReader<String> {
+    override fun read(): List<String> {
+        try {
+            BufferedReader(FileReader(filename)).use { reader ->
+                return reader.readLines()
+            }
+        } catch (exception: IOException) {
+            throw ReadingError(exception.message)
+        }
+    }
+}
+
+interface PersonalFileReader<T> {
+    fun read(): List<T>
 }
