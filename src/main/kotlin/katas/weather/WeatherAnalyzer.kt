@@ -44,11 +44,3 @@ class WeatherAnalyzer {
         println("Temperature Spread: ${getTemperatureSpread()}")
     }
 }
-
-fun main() {
-    val weatherAnalyzer = WeatherAnalyzer()
-    weatherAnalyzer.addTemperature(25.0)
-    weatherAnalyzer.addTemperature(30.0)
-    weatherAnalyzer.addTemperature(20.0)
-    weatherAnalyzer.printReport()
-}
