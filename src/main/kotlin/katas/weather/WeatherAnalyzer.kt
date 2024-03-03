@@ -8,31 +8,15 @@ class WeatherAnalyzer {
     }
 
     fun getAverageTemperature(): Double {
-        var sum = 0.0
-        for (temperature in temperatures) {
-            sum += temperature
-        }
-        return sum / temperatures.size
+        return temperatures.average()
     }
 
     fun getMaxTemperature(): Double {
-        var max = Double.MIN_VALUE
-        for (temperature in temperatures) {
-            if (temperature > max) {
-                max = temperature
-            }
-        }
-        return max
+        return temperatures.maxOrNull() ?: Double.MIN_VALUE
     }
 
     fun getMinTemperature(): Double {
-        var min = Double.MAX_VALUE
-        for (temperature in temperatures) {
-            if (temperature < min) {
-                min = temperature
-            }
-        }
-        return min
+        return temperatures.minOrNull() ?: Double.MAX_VALUE
     }
 
     fun getTemperatureSpread(): Double {
