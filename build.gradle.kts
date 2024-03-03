@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.8.0"
+    kotlin("jvm") version "1.9.22"
     application
 }
 
@@ -12,8 +12,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation("io.kotest:kotest-assertions-core-jvm:5.7.2")
-    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.0")
+    testImplementation("io.mockk:mockk:1.13.10")
 }
 
 tasks.test {
@@ -21,7 +21,7 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 application {
