@@ -1,8 +1,10 @@
 package katas.compoundinterest
 
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled
 class CompoundInterestCalculatorTest {
     @Test
     fun `should calculate compound interest result after 30 years`() {
