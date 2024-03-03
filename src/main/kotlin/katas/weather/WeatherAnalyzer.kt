@@ -3,8 +3,9 @@ package katas.weather
 class WeatherAnalyzer {
     private val temperatures: MutableList<Double> = mutableListOf()
 
-    fun addTemperature(temperature: Double) {
+    fun addTemperature(temperature: Double): WeatherAnalyzer {
         temperatures.add(temperature)
+        return this
     }
 
     private fun average() = temperatures.average()
