@@ -7,26 +7,18 @@ class WeatherAnalyzer {
         temperatures.add(temperature)
     }
 
-    fun getAverageTemperature(): Double {
-        return temperatures.average()
-    }
+    private fun average() = temperatures.average()
 
-    fun getMaxTemperature(): Double {
-        return temperatures.maxOrNull() ?: Double.MIN_VALUE
-    }
+    private fun max() = temperatures.maxOrNull() ?: Double.MIN_VALUE
 
-    fun getMinTemperature(): Double {
-        return temperatures.minOrNull() ?: Double.MAX_VALUE
-    }
+    private fun min() = temperatures.minOrNull() ?: Double.MAX_VALUE
 
-    fun getTemperatureSpread(): Double {
-        return getMaxTemperature() - getMinTemperature()
-    }
+    private fun spread() = max() - min()
 
     fun printReport() {
-        println("Average Temperature: ${getAverageTemperature()}")
-        println("Max Temperature: ${getMaxTemperature()}")
-        println("Min Temperature: ${getMinTemperature()}")
-        println("Temperature Spread: ${getTemperatureSpread()}")
+        println("Average Temperature: ${average()}")
+        println("Max Temperature: ${max()}")
+        println("Min Temperature: ${min()}")
+        println("Temperature Spread: ${spread()}")
     }
 }
