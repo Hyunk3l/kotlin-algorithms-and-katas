@@ -1,6 +1,5 @@
 package katas.weather
 
-import WeatherAnalyzer
 import io.kotest.matchers.shouldBe
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
@@ -26,6 +25,25 @@ class WeatherAnalyzerShould {
             Max Temperature: 23.0
             Min Temperature: 21.0
             Temperature Spread: 2.0
+            
+        """.trimIndent()
+    }
+
+    @Test
+    fun `print report with no added temperatures`() {
+        val outputStream = ByteArrayOutputStream()
+        val printStream = PrintStream(outputStream)
+        System.setOut(printStream)
+        val weatherAnalyzer = WeatherAnalyzer()
+
+        weatherAnalyzer.printReport()
+
+        val capturedOutput = outputStream.toString()
+        capturedOutput shouldBe """
+            Average Temperature: NaN
+            Max Temperature: ${Double.MIN_VALUE}
+            Min Temperature: ${Double.MAX_VALUE}
+            Temperature Spread: ${Double.MIN_VALUE-Double.MAX_VALUE}
             
         """.trimIndent()
     }

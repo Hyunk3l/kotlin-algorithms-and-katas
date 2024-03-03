@@ -1,3 +1,5 @@
+package katas.weather
+
 class WeatherAnalyzer {
     private val temperatures: MutableList<Double> = mutableListOf()
 
