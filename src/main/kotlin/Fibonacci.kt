@@ -1,7 +1,7 @@
 
 
 class Fibonacci {
-    fun getFrom(number: Int): Int {
+    fun getFromUsingBruteForce(number: Int): Int {
         if (number <= 1) { return number }
         val counter = mutableMapOf<Int, Int>()
         counter[0] = 0
