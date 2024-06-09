@@ -1,5 +1,3 @@
-package com.fabridinapoli.kotlinalgorithms
-
 class FindSubstringsWithNoRepeatingCharacters {
     fun findFrom(initial: String): List<String> {
         val combinations = mutableListOf<String>()
