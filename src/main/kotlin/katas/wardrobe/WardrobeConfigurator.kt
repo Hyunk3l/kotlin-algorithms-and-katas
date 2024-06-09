@@ -24,4 +24,25 @@ class WardrobeConfigurator {
             it.sorted()
         }?.toSet()?.toMutableList() ?: emptyList()
     }
+
+    fun getCombinationsRecursive(
+        wallSize: Int,
+        modules: List<Int>,
+        currentCombination: MutableList<Int>,
+        result: MutableList<List<Int>> = mutableListOf()
+    ): MutableList<List<Int>> {
+        if (wallSize == 0) {
+            result.add(currentCombination.toList())
+            return result
+        }
+
+        if (wallSize < 0) return result
+
+        for (module in modules) {
+            currentCombination.add(module)
+            getCombinationsRecursive(wallSize - module, modules, currentCombination, result)
+            currentCombination.removeAt(currentCombination.size - 1)
+        }
+        return result
+    }
 }
