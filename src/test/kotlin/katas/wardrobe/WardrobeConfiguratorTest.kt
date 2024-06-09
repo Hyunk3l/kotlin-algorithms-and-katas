@@ -4,13 +4,16 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class WardrobeConfiguratorTest {
+
+    private val wardrobeConfigurator = WardrobeConfigurator()
+
     @Test
     fun `should be able to find one combination`() {
         val expected = listOf(
             listOf(50, 50, 50, 50, 50)
         )
 
-        val result = WardrobeConfigurator().getCombinations(wallSize = 250, listOf(50))
+        val result = wardrobeConfigurator.getCombinations(wallSize = 250, listOf(50))
 
         result shouldBe expected
     }
@@ -22,7 +25,7 @@ class WardrobeConfiguratorTest {
             listOf(50, 50, 75, 75)
         )
 
-        val result = WardrobeConfigurator().getCombinations(wallSize = 250, listOf(50, 75))
+        val result = wardrobeConfigurator.getCombinations(wallSize = 250, listOf(50, 75))
 
         result shouldBe expected
     }
@@ -37,7 +40,7 @@ class WardrobeConfiguratorTest {
             listOf(75, 75, 100 ),
         )
 
-        val result = WardrobeConfigurator()
+        val result = wardrobeConfigurator
             .getCombinations(wallSize = 250, listOf(50, 75, 100, 120))
 
         result shouldBe expected
