@@ -20,7 +20,7 @@ class BankAccounting {
 
         verify {
             printer.print("DATE       | AMOUNT | BALANCE")
-            printer.print("10/04/2014 | 500.00  | 1400.00")
+            printer.print("10/04/2014 | 500.00 | 1400.00")
             printer.print("02/04/2014 | -100.00 | 900.00")
             printer.print("01/04/2014 | 1000.00 | 1000.00")
         }
