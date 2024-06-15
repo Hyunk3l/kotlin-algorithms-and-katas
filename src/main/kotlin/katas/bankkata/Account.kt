@@ -1,6 +1,6 @@
 package katas.bankkata
 
-class Account {
+class Account(printer: Printer) {
     fun deposit(amount: Int) {
         TODO()
     }
