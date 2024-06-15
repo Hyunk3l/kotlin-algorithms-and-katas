@@ -10,7 +10,8 @@ class BankAccounting {
     @Test
     fun `should print a valid statement`() {
         val printer = mockk<Printer>()
-        val account = Account(printer)
+        val accountRepository = mockk<AccountRepository>()
+        val account = Account(printer, accountRepository)
         account.deposit(1000)
         account.withdraw(100)
         account.deposit(500)

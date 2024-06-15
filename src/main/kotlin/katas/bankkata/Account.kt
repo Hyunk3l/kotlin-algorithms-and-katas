@@ -1,12 +1,12 @@
 package katas.bankkata
 
-class Account(printer: Printer) {
+class Account(private val printer: Printer, private val repository: AccountRepository) {
     fun deposit(amount: Int) {
-        TODO()
+        repository.book(amount)
     }
 
     fun withdraw(amount: Int) {
-        TODO()
+        repository.book(-amount)
     }
 
     fun printStatement() {
