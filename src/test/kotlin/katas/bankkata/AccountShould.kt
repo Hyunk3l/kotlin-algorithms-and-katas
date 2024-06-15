@@ -5,13 +5,14 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 
+private val printer = mockk<Printer>()
+private val accountRepository = mockk<AccountRepository>()
+private val account = Account(printer = printer, repository = accountRepository)
+
 class AccountShould {
     @Test
     fun `deposit amount in a bank account`() {
         val amount = 1000
-        val printer = mockk<Printer>()
-        val accountRepository = mockk<AccountRepository>()
-        val account = Account(printer = printer, repository = accountRepository)
         justRun { accountRepository.book(amount) }
 
         account.deposit(amount)
@@ -22,9 +23,6 @@ class AccountShould {
     @Test
     fun `withdraw amount in a bank account`() {
         val amount = 500
-        val printer = mockk<Printer>()
-        val accountRepository = mockk<AccountRepository>()
-        val account = Account(printer = printer, repository = accountRepository)
         justRun { accountRepository.book(-amount) }
 
         account.withdraw(amount)
