@@ -1,16 +1,21 @@
 package katas.bankkata
 
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.spyk
 import io.mockk.verify
-import org.junit.jupiter.api.Disabled
+import java.time.Clock
 import org.junit.jupiter.api.Test
 
-@Disabled
 class BankAccounting {
     @Test
     fun `should print a valid statement`() {
-        val printer = mockk<Printer>()
-        val accountRepository = mockk<AccountRepository>()
+        val clock = mockk<Clock>()
+        every {
+            clock.toString()
+        } returnsMany listOf("01/04/2014", "02/04/2014", "10/04/2014")
+        val printer = spyk<Printer>()
+        val accountRepository = InMemoryAccountRepository(clock)
         val account = Account(printer, accountRepository)
         account.deposit(1000)
         account.withdraw(100)
