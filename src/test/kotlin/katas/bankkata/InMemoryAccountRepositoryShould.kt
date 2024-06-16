@@ -7,12 +7,13 @@ import io.mockk.verify
 import java.time.Clock
 import org.junit.jupiter.api.Test
 
+private val clock = mockk<Clock>()
+private val inMemoryAccountRepository = InMemoryAccountRepository(clock)
+
 class InMemoryAccountRepositoryShould {
     @Test
     fun `book a transaction`() {
-        val clock = mockk<Clock>()
         every { clock.toString() } returns "01/04/2014"
-        val inMemoryAccountRepository = InMemoryAccountRepository(clock)
 
         inMemoryAccountRepository.book(100)
 
@@ -21,9 +22,7 @@ class InMemoryAccountRepositoryShould {
 
     @Test
     fun `book a transaction with negative amount`() {
-        val clock = mockk<Clock>()
         every { clock.toString() } returns "01/04/2014"
-        val inMemoryAccountRepository = InMemoryAccountRepository(clock)
 
         inMemoryAccountRepository.book(-100)
 
@@ -32,7 +31,6 @@ class InMemoryAccountRepositoryShould {
 
     @Test
     fun `find a list of transactions`() {
-        val clock = mockk<Clock>()
         every { clock.toString() } returnsMany listOf("01/04/2014", "02/04/2014")
         val inMemoryAccountRepository = InMemoryAccountRepository(clock)
         inMemoryAccountRepository.book(100)
