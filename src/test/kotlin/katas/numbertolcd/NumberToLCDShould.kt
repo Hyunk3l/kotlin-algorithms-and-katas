@@ -22,4 +22,14 @@ class NumberToLCDShould {
             | _|
             ||_ """.trimIndent()
     }
+
+    @Test
+    fun `display correctly numbers from 1 to 9`() {
+        val result = NumberToLCD().invoke(123456789)
+
+         result.trimIndent() shouldBe """
+                _  _     _  _  _  _  _
+             | _| _||_||_ |_   ||_||_|
+             ||_  _|  | _||_|  ||_| _|""".trimIndent()
+    }
 }
