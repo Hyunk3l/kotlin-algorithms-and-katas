@@ -15,21 +15,20 @@ class NumberToLCD {
     )
 
     operator fun invoke(number: Int): String {
-        val numberToString = number.toString()
         val availableLcdNumbers = mutableListOf<List<String>>()
-        numberToString.forEach {
+        number.toString().forEach {
             if (it.digitToInt() in lcdNumbers) {
                 availableLcdNumbers.add(lcdNumbers[it.digitToInt()]!!)
             }
         }
 
-        var result = ""
+        val result = StringBuilder()
         (0..2).forEach {
             availableLcdNumbers.forEach { available ->
-                result += available[it]
+                result.append(available[it])
             }
-            result += "\n"
+            result.append("\n")
         }
-        return result.trimIndent()
+        return result.toString().trimIndent()
     }
 }
