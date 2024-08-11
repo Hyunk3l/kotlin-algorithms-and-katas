@@ -11,8 +11,8 @@ produces the total score for the game. Here are some things that the program wil
 - We will not check for valid rolls.
 - We will not check for correct number of rolls and frames.
 - We will not provide scores for intermediate frames.
-D
-- epending on the application, this might or might not be a valid way to define a complete story,
+
+- Depending on the application, this might or might not be a valid way to define a complete story,
 - but we do it here for purposes of keeping the kata light.
 - I think you’ll see that improvements like those above would go in readily if they were needed for real.
 
