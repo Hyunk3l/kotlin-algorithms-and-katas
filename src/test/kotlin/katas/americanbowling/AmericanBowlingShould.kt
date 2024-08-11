@@ -21,4 +21,13 @@ class AmericanBowlingShould {
 
         result shouldBe 90
     }
+
+    @Test
+    fun `calculate 19 rolls, 1 strike, 9 pairs of 9 and miss`() {
+        val score = "X 9- 9- 9- 9- 9- 9- 9- 9- 9-"
+
+        val result = AmericanBowling().calculate(score)
+
+        result shouldBe 91
+    }
 }
