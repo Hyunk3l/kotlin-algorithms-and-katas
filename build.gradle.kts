@@ -13,7 +13,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.9.1")
-    testImplementation("io.mockk:mockk:1.13.14")
+    testImplementation("io.mockk:mockk:1.13.16")
 }
 
 tasks.test {
